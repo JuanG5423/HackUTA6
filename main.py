@@ -18,20 +18,11 @@ with open("journal.txt", "r") as file:
     for entry in journal_entries:
         st.write(entry)
 
-#Make an account feature where you can sign up and log in
-st.write("Account Feature")
-username = st.text_input("Username")
-password = st.text_input("Password", type="password")
-if st.button("Sign Up"):
-    with open("accounts.txt", "a") as file:
-        file.write(f"{username},{password}\n")
-    st.write("Account created successfully")
-if st.button("Log In"):
-    with open("accounts.txt", "r") as file:
-        accounts = file.readlines()
-        for account in accounts:
-            if account.startswith(f"{username},{password}"):
-                st.write("Logged in successfully")
-                break
-        else:
-            st.write("Invalid credentials")
+row1 = st.columns(3)
+row2 = st.columns(3)
+
+for col in row1 + row2:
+    tile = col.container(height=120)
+    tile.title(":balloon:")
+    tile.write("journal stuff")
+

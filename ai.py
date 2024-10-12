@@ -8,9 +8,14 @@ from transformers import pipeline
 #print(result)  # Output: [{'label': 'POSITIVE', 'score': 0.9998}]
 
 
-print("This is in branch Juan")
-
 # For emotion detection
 emotion_analyzer = pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base")
-emotions = emotion_analyzer("My friend went to the beach and gotgot a tan. Good on them")
-print(emotions)
+
+#emotions is a list containing a dictionary in the format [{'label': 'emotion', 'score': float}]
+
+text = input("Enter text to analyze: ")
+while text:
+    emotions = emotion_analyzer(text)
+    print(f"Emotion: {emotions[0]['label']}, Confidence: {emotions[0]['score']*100:.1f}%")
+    text = input("Enter text to analyze: ")
+

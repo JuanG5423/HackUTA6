@@ -25,3 +25,4 @@ for col in row1 + row2:
     tile = col.container(height=120)
     tile.title(":balloon:")
     tile.write("journal stuff")
+

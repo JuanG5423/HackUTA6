@@ -44,7 +44,12 @@ if st.session_state.user_state['logged_in']:
             return string
         else:
             return string[:max_length] + "..."
-
+        
+    
+    
+    col_1, col_2, col_3 = st.columns([4,8,4])
+    with col_3:
+        st.page_link("Pages/Page.py", label="New Page", icon=":material/note_add:")
     if st.button("Clear Pages"):
         clear_pages()
     folder_path = './entries'

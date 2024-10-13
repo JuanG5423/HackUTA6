@@ -4,11 +4,11 @@ import requests as rs
 from cryptography.fernet import Fernet
 import csv
 
-
 st.title('JADA: the App that cares')
-
 database = pd.read_csv('database.csv', header=0)
 
+pass_key = b'-fguMgQqf6smHyZyo-Boqpm99UGfOhL94dfLOk4Vu9M='
+cypher = Fernet(pass_key)
 
 def get_name():
     return st.session_state.user_state['mail_adress']
@@ -17,7 +17,7 @@ def login():
     if len(user_) == 0:
         st.error('User not found')
     else:
-        if user_['mail_adress'].values[0] == mail_adress and user_['password'].values[0] == password:
+        if user_['mail_adress'].values[0] == mail_adress and (cypher.decrypt(user_['password'].values[0].encode())).decode() == password:
             st.session_state.user_state['mail_adress'] = mail_adress
             st.session_state.user_state['password'] = password
             st.session_state.user_state['logged_in'] = True
@@ -56,7 +56,7 @@ if not st.session_state.user_state['logged_in']:
                 else:
                     # Write the new entry
                     file.write("\n")
-                    file.write(f"{mail},{name},user,{word},{Fernet.generate_key().decode()},{7770000 + len(lines)}")
+                    file.write(f"{mail},{name},user,{cypher.encrypt(word.encode()).decode()},{Fernet.generate_key().decode()},{7770000 + len(lines)}")
                     st.rerun()
 
     if st.button("Create Login", use_container_width=True):
@@ -81,5 +81,3 @@ def decrypt_journal(message : str):
     key = get_auth_key()
     f = Fernet(key)
     return f.decrypt(message.encode('utf-8')).decode()
-
-

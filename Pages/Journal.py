@@ -28,6 +28,10 @@ def clear_pages():
             except Exception as e:
                 print(f"Error deleting {file_path}: {e}")
                 exit(-1)
+# Load custom CSS for styling
+def load_css(file_path):
+    with open(file_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 if st.session_state.user_state['logged_in']:
@@ -41,7 +45,7 @@ if st.session_state.user_state['logged_in']:
         else:
             return string[:max_length] + "..."
 
-    if st.button("Clear Pages", key= "ClearP"):
+    if st.button("Clear Pages"):
         clear_pages()
     folder_path = './entries'
     files = [f for f in os.listdir(folder_path) if f.endswith('.jada') and f.startswith(str(st.session_state.user_state['user_ID']))]
@@ -49,7 +53,7 @@ if st.session_state.user_state['logged_in']:
     # Dialog to show results after analysis
     @st.dialog("JADA is Responding...")
     def analyze_file(context):
-        emotion, confidence = analyze_input(pipeline("text-classification", model="JuanG5423/JADA"), context)
+        emotion, confidence = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
         output = f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence." if emotion == "suicidal" else f"Your journal entry indicates that you are experiencing {emotion} with {confidence}% confidence."
         st.write(output)
         if emotion == "suicidal":

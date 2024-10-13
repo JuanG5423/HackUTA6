@@ -30,10 +30,9 @@ if st.session_state.user_state['logged_in']:
                     container.write(truncate_string(context, 100))
 
                     #Perform analysis using our model and tokenizer with the context as input
-                    print(context)
                     analysis_result = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
-                    #analysis_result is a string in the format Emotion: <emotion>, Confidence: <confidence%>
-                    print(analysis_result)
+                    #analysis_result is a string in the format: Your journal entry indicates that you are feeling <emotion> with a confidence of <confidence>%
+                    st.write(analysis_result)
 
         add_page = st.container()
         add_page.page_link("Pages/Page.py",label="Add Page",icon=":material/add_circle:")

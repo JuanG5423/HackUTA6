@@ -34,13 +34,20 @@ Demo_page = st.Page(
     icon = ":material/play_arrow:",
 )
 
+Login_page = st.Page(
+    page = "Pages/Login.py",
+    title = "Login",
+    icon =":material/login:",
+)
+
+
+
 
 
 
 # --- Navigation setup [without sections] --
-
-st.logo("/home/unknown/HackUTA6/Assets/JADALOGO.png") 
-NPG = st.navigation(pages=[about_page, journal_page, home_page, Demo_page])
+st.logo("Assets/JADALOGO.png") 
+NPG = st.navigation(pages=[about_page, journal_page, home_page, Demo_page, Login_page])
 NPG.run()
 
 

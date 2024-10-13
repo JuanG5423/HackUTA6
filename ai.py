@@ -199,10 +199,10 @@ IM SO FUCKING ANGRY
     
     elif len(argv) >= 2 and argv[1] == "ask":
         # Initialize the question-answering pipeline once
-        qa_pipeline = pipeline("question-answering", model="meta-llama/Llama-3.1-8B")
+        qa_pipeline = pipeline("question-answering")
 
-        text = "He told me he would kill me"
-        question = "Has he threatened to kill me?"
+        text = "I am feeling sad"
+        question = "Any words of comfort?"
 
         # Call the answer_question function
         answer = answer_question(qa_pipeline, question, text)

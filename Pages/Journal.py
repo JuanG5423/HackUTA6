@@ -1,7 +1,10 @@
 import streamlit as st
 import os
 from cryptography.fernet import Fernet
-from Pages.Login import get_auth_key
+from Pages.Login import get_auth_key, decrypt_journal
+from ai import analyze_input
+from transformers import pipeline
+
 
 if st.session_state.user_state['logged_in']:
     key = get_auth_key()
@@ -25,6 +28,11 @@ if st.session_state.user_state['logged_in']:
                     container = st.container(border=True)
                     container.columns(len(os.listdir(folder_path)), vertical_alignment="bottom")
                     container.write(truncate_string(context, 100))
+
+                    #Perform analysis using our model and tokenizer with the context as input
+                    analysis_result = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
+                    #analysis_result is a string in the format: Your journal entry indicates that you are feeling <emotion> with a confidence of <confidence>%
+                    st.write(analysis_result)
 
         add_page = st.container()
         add_page.page_link("Pages/Page.py",label="Add Page",icon=":material/add_circle:")

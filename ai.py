@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+import torch
 from sys import argv
 from datasets import load_dataset
 from transformers import (
@@ -7,10 +8,12 @@ from transformers import (
     AutoTokenizer, 
     AutoModelForSequenceClassification, 
     Trainer, 
-    TrainingArguments
+    TrainingArguments,
+    BertForQuestionAnswering,
+    BertTokenizer
 )
 
-def analyze_input(emotion_analyzer) -> None:
+def analyze_input(emotion_analyzer, text : str) -> str:
     """
     Keeps prompting the user for input and performs emotional analysis on each input.
     Prints the detected emotion and confidence score.
@@ -31,12 +34,13 @@ def analyze_input(emotion_analyzer) -> None:
         '11': "harmful traditional practice"
     }
 
-    text = input("Enter text to analyze: ")
-    while text:
-        emotions = emotion_analyzer(text)
-        #Fix print statement
-        print(f"Emotion: {label2emotion[emotions[0]['label'].split('_')[1]]}, Confidence: {emotions[0]['score'] * 100:.1f}%")
-        text = input("Enter text to analyze: ")
+    emotions = emotion_analyzer(text)
+    #Fix print statement
+    emotion = emotions[0]['label'].split('_')[1]
+    confidence = emotions[0]['score'] * 100
+    result =  f"Emotion:{emotion},Confidence:{confidence:.1f}%"
+    return f"Your journal entry indicates that you are feeling {label2emotion[emotion]} with a confidence of {confidence:.1f}%"
+    
 
 def tokenize_function(examples, tokenizer):
     """
@@ -159,6 +163,14 @@ def delete_first_column(input_csv_file : str, output_csv_file : str):
     df = pd.read_csv(input_csv_file)
     df.drop(df.columns[0], axis=1, inplace=True)
     df.to_csv(output_csv_file, index=False)
+
+def answer_question(qa_pipeline, question, text):
+    result = qa_pipeline({
+        'question': question,
+        'context': text
+    })
+    return result['answer']
+
             
 if __name__ == "__main__":
     data_file = "data/data.csv"
@@ -172,10 +184,29 @@ if __name__ == "__main__":
     
     if len(argv) >= 2 and argv[1] == "test":
         #analyze_input(pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base"))
-        analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"))
+        analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), """
+I am feeling depressed
+I want to kill myself
+I want to kill myself
+I want to end it all
+I hate myself
+Make it stop
+IM SO FUCKING ANGRY
+""")
 
-    if len(argv) >= 2 and argv[1] == "fix":
+    elif len(argv) >= 2 and argv[1] == "fix":
         delete_lines_with_non_digit_substring("data/suicide_cleaned.csv", "data/suicide_cleaned2.csv")
+    
+    elif len(argv) >= 2 and argv[1] == "ask":
+        # Initialize the question-answering pipeline once
+        qa_pipeline = pipeline("question-answering", model="meta-llama/Llama-3.1-8B")
+
+        text = "He told me he would kill me"
+        question = "Has he threatened to kill me?"
+
+        # Call the answer_question function
+        answer = answer_question(qa_pipeline, question, text)
+        print(answer)
     
     else:
         files_to_process = ["data/test.csv", "data/suicide_cleaned.csv", "data/big_data.csv", "data/violence_cleaned.csv"]
@@ -184,6 +215,6 @@ if __name__ == "__main__":
             if "label" not in df.columns:
                 add_label(file, file.split(".")[0] + "_labeled.csv", 6)
                 files_to_process[index] = file.split(".")[0] + "_labeled.csv"
-        combine_files(files_to_process, "data/full_dataset.csv", 1500)
+        combine_files(files_to_process, "data/full_dataset.csv", 20000)
         split_data("data/full_dataset.csv", "data/full_training.csv", "data/full_validation.csv")
         teach_emotion("data/full_training.csv", "data/full_validation.csv", "j-hartmann/emotion-english-distilroberta-base", 12, device)

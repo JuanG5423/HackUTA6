@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import pathlib
+import html
 from cryptography.fernet import Fernet
 from Pages.Login import get_auth_key, decrypt_journal
 from ai import analyze_input
@@ -53,11 +54,15 @@ if st.session_state.user_state['logged_in']:
 
                 with col1:
                     # Box the journal content with some padding and border
+                    sanitized_text = html.escape(truncated_text)
                     st.markdown(f"""
-                    <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; background-color: #f9f9f9;">
-                        {truncated_text}
+                    <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; background-color: transparent;">
+                        {sanitized_text}
                     </div>
-                    """, unsafe_allow_html=True)
+                    """, unsafe_allow_html=True
+                    )
+                    
+        
 
                 with col2:
                     # Place the analyze button in the second column (to the right)

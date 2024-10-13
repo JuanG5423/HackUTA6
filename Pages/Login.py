@@ -11,7 +11,7 @@ pass_key = b'-fguMgQqf6smHyZyo-Boqpm99UGfOhL94dfLOk4Vu9M='
 cypher = Fernet(pass_key)
 
 def get_name():
-    return st.session_state.user_state['mail_adress']
+    return st.session_state.user_state['name_surname']
 def login():
     user_ = database[database['mail_adress'] == mail_adress].copy()
     if len(user_) == 0:
@@ -21,6 +21,7 @@ def login():
             st.session_state.user_state['mail_adress'] = mail_adress
             st.session_state.user_state['password'] = password
             st.session_state.user_state['logged_in'] = True
+            st.session_state.user_state['name_surname'] = user_['name_surname'].values[0]
             st.session_state.user_state['user_type'] = user_['user_type'].values[0]
             st.session_state.user_state['mail_adress'] = user_['mail_adress'].values[0]
             st.session_state.user_state['auth_key'] = user_['auth_key'].values[0]

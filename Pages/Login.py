@@ -69,6 +69,17 @@ if not st.session_state.user_state['logged_in']:
         login()
 elif st.session_state.user_state['logged_in']:
     st.write('You are logged in as:', get_name())
+    if st.button("Logout", use_container_width=True):
+        st.session_state.user_state = {
+        'name_surname': '',
+        'password': '',
+        'logged_in': False,
+        'user_type': '',
+        'mail_adress': '',
+        'auth_key': '',
+        'user_ID': ''
+        }
+        st.rerun()
     if st.session_state.user_state['user_type'] == 'admin':
         st.write('You have admin rights. Here is the database')
         st.table(database)

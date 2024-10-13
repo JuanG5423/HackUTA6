@@ -68,43 +68,11 @@ with bottom:
         st.text("")
         st.image(image_path2, width=150);
         
-  
-@st.dialog("JADA is Responding...")
-def AI_popUP(button_active):
-    dail_col1, dail_col2, dail_col3 = st.columns([1.,2,1])
-    dail_top = st.container()
-    dail_center = st.container()
-    dail_bottom = st.container()
-    with dail_col1:
-        if button_active == True:
-            st.text("was good")
-    with dail_col3:
-        st.text("")
-        st.text("")
-        st.text("")
-        st.text("")
-        st.text("")
-        st.image("Assets/JADAAI.png", width=100)
+
    
         
 
-with col3:
-    st.text("")
-    st.text("")
-    st.text("")
-    st.text("") 
-    st.text("")
-    st.text("")
-    st.text("")
-    st.text("")
-    if 'button_active' not in st.session_state:
-            st.session_state['button_active'] = False
 
-# Create a button
-    if st.button("", icon=":material/psychology_alt:", key="Help"):
-    # Toggle the button's state each time it's clicked
-        st.session_state['button_active'] = not st.session_state['button_active']
-        AI_popUP(st.session_state['button_active'])
         
     
         

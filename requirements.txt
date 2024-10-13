@@ -1,0 +1,8 @@
+cryptography==3.4.8
+datasets==3.0.1
+pandas==2.2.3
+Pillow==10.4.0
+Requests==2.32.3
+streamlit==1.39.0
+torch==2.1.2
+transformers==4.41.2

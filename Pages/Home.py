@@ -14,5 +14,5 @@ with col2:
 st.text(
     "JADA is a Journaling AI Detection App. Anger, joy, sadness, write your mind down and\nsee what JADA thinks"
     )
-    
+
     

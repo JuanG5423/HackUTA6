@@ -14,7 +14,7 @@ if st.session_state.user_state['logged_in']:
 
     # Get the user ID from session state and build the file path
     user_id = str(st.session_state.user_state['user_ID'])
-    file_path = f"entries/{user_id}entry{time_stamp.strftime('%d%m%Y')}.jada"
+    file_path = f"entries/{user_id}entry{time_stamp.strftime('%d%m%Y%M')}.jada"
 
     st.title("How Are You Feeling Today?")
     entry = st.text_area("Write your feelings", height=900)

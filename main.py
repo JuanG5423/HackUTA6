@@ -16,8 +16,8 @@ about_page = st.Page(
 )
 
 journal_page = st.Page(
-    page = "Pages/Journal.py",
-    title = "Journal",
+    page = "Pages/Journals.py",
+    title = "Journals",
     icon = ":material/book:",
 )
 
@@ -28,25 +28,17 @@ home_page = st.Page(
     default= True,
 )
 
-Page_page = st.Page(
-    page = "Pages/Page.py",
-    title = "New Page",
-    icon = ":material/note_add:"
-)
-
-
-Login_page = st.Page(
-    page = "Pages/Login.py",
-    title = "Log in"
-)
-
 Demo_page = st.Page(
     page = "Pages/Demo.py",
     title = "Demo",
     icon = ":material/play_arrow:",
 )
 
-
+Login_page = st.Page(
+    page = "Pages/Login.py",
+    title = "Login",
+    icon =":material/login:",
+)
 
 
 # --- Navigation setup [without sections] --
@@ -56,3 +48,5 @@ NPG.run()
 
 
 
+
+# st.markdown(

@@ -184,6 +184,6 @@ if __name__ == "__main__":
             if "label" not in df.columns:
                 add_label(file, file.split(".")[0] + "_labeled.csv", 6)
                 files_to_process[index] = file.split(".")[0] + "_labeled.csv"
-        combine_files(files_to_process, "data/full_dataset.csv", 1500)
+        combine_files(files_to_process, "data/full_dataset.csv", 20000)
         split_data("data/full_dataset.csv", "data/full_training.csv", "data/full_validation.csv")
         teach_emotion("data/full_training.csv", "data/full_validation.csv", "j-hartmann/emotion-english-distilroberta-base", 12, device)

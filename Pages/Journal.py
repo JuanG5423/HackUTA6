@@ -32,7 +32,7 @@ if st.session_state.user_state['logged_in']:
     # Dialog to show results after analysis
     @st.dialog("JADA is Responding...")
     def analyze_file(context):
-        emotion, confidence = analyze_input(pipeline("text-classification", model="JuanG5423/JADA"), context)
+        emotion, confidence = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
         output = f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence." if emotion == "suicidal" else f"Your journal entry indicates that you are experiencing {emotion} with {confidence}% confidence."
         st.write(output)
         if emotion == "suicidal":

@@ -39,14 +39,15 @@ if st.session_state.user_state['logged_in']:
 
                     @st.dialog("JADA is Responding...")
                     def AI_popUP(button_active):
-                        dail_col1, dail_col2, dail_col3 = st.columns([1.,2,1])
+                        dail_col1, dail_col2, dail_col3 = st.columns([1,0,1])
                         dail_top = st.container()
                         dail_center = st.container()
                         dail_bottom = st.container()
                         with dail_col1:
                             if button_active == True:
                                 emotion, confidence = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
-                                st.write(f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence.")
+                                output = f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence." if emotion == "suicidal" else f"Your journal entry indicates that you are experiencing {emotion} with {confidence}% confidence."
+                                st.write(output)
                                 if emotion == "suicidal":
                                     st.write("I'm so sorry you're feeling like that. Please reach out to a mental health professional or call the suicide hot line at 1-800-273-8255. Sometimes talking to someone close can help too! such as a friend or family memeber.")
                                 elif emotion == "sexual violence" or emotion == "physical violence":

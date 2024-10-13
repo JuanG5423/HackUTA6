@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+import torch
 from sys import argv
 from datasets import load_dataset
 from transformers import (
@@ -7,7 +8,9 @@ from transformers import (
     AutoTokenizer, 
     AutoModelForSequenceClassification, 
     Trainer, 
-    TrainingArguments
+    TrainingArguments,
+    BertForQuestionAnswering,
+    BertTokenizer
 )
 
 def analyze_input(emotion_analyzer) -> None:
@@ -159,6 +162,14 @@ def delete_first_column(input_csv_file : str, output_csv_file : str):
     df = pd.read_csv(input_csv_file)
     df.drop(df.columns[0], axis=1, inplace=True)
     df.to_csv(output_csv_file, index=False)
+
+def answer_question(qa_pipeline, question, text):
+    result = qa_pipeline({
+        'question': question,
+        'context': text
+    })
+    return result['answer']
+
             
 if __name__ == "__main__":
     data_file = "data/data.csv"
@@ -174,8 +185,19 @@ if __name__ == "__main__":
         #analyze_input(pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base"))
         analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"))
 
-    if len(argv) >= 2 and argv[1] == "fix":
+    elif len(argv) >= 2 and argv[1] == "fix":
         delete_lines_with_non_digit_substring("data/suicide_cleaned.csv", "data/suicide_cleaned2.csv")
+    
+    elif len(argv) >= 2 and argv[1] == "ask":
+        # Initialize the question-answering pipeline once
+        qa_pipeline = pipeline("question-answering", model="meta-llama/Llama-3.1-8B")
+
+        text = "He told me he would kill me"
+        question = "Has he threatened to kill me?"
+
+        # Call the answer_question function
+        answer = answer_question(qa_pipeline, question, text)
+        print(answer)
     
     else:
         files_to_process = ["data/test.csv", "data/suicide_cleaned.csv", "data/big_data.csv", "data/violence_cleaned.csv"]
@@ -184,6 +206,6 @@ if __name__ == "__main__":
             if "label" not in df.columns:
                 add_label(file, file.split(".")[0] + "_labeled.csv", 6)
                 files_to_process[index] = file.split(".")[0] + "_labeled.csv"
-        combine_files(files_to_process, "data/full_dataset.csv", 1500)
+        combine_files(files_to_process, "data/full_dataset.csv", 20000)
         split_data("data/full_dataset.csv", "data/full_training.csv", "data/full_validation.csv")
         teach_emotion("data/full_training.csv", "data/full_validation.csv", "j-hartmann/emotion-english-distilroberta-base", 12, device)

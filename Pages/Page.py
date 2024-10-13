@@ -50,4 +50,20 @@ if st.session_state.user_state['logged_in']:
 
         st.success("Your entry has been saved.")
 else:
-    st.title("Login to use our App!!")
+    def click(button_active):
+        if button_active == True:
+            with st.expander("Options"):
+                st.page_link("Pages/Login.py", label= "Create or Login", icon=":material/login:")
+                st.markdown("-------")
+                st.page_link("Pages/Home.py", label="Home", icon=":material/nest_eco_leaf:")
+                
+    
+    if 'button_active' not in st.session_state:
+        st.session_state['button_active'] = False
+
+    # Create a button
+    if st.button("OOPS! Need A Registered Account to use Journals.", icon=":material/warning:", key="OOPS"):
+    # Toggle the button's state each time it's clicked
+        st.session_state['button_active'] = not st.session_state['button_active']
+        click(st.session_state['button_active'])
+

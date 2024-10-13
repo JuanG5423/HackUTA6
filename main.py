@@ -26,7 +26,7 @@ about_page = st.Page(
 )
 
 journal_page = st.Page(
-    page = "Pages/Journals.py",
+    page = "Pages/Journal.py",
     title = "Journals",
     icon = ":material/book:",
 )
@@ -53,8 +53,8 @@ Login_page = st.Page(
 
 # --- Navigation setup [without sections] --
 
-st.logo("/home/unknown/HackUTA6/Assets/JADALOGO.png") 
-NPG = st.navigation(pages=[about_page, journal_page, home_page, Demo_page])
+st.logo("Assets/JADALOGO.png") 
+NPG = st.navigation(pages=[about_page, journal_page, home_page, Demo_page, Login_page])
 NPG.run()
 
 

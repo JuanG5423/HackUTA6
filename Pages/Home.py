@@ -50,7 +50,7 @@ with bottom:
             st.markdown("-------")
             
             st.text("Access Your Journal")
-            st.page_link("Pages/Journals.py", label= "Journal", icon=":material/book:")
+            st.page_link("Pages/Journal.py", label= "Journal", icon=":material/book:")
             st.markdown("-------")
             
             st.text("Know The Team")

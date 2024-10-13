@@ -29,14 +29,23 @@ home_page = st.Page(
 )
 
 
+Page_page = st.Page(
+    page = "Pages/Page.py",
+    title = "New Page",
+    icon = ":material/note_add:"
+)
+
+
 
 
 
 # --- Navigation setup [without sections] --
 
 st.logo("Assets/JADALOGO.png") 
-NPG = st.navigation(pages=[about_page, journal_page, home_page])
+NPG = st.navigation(pages=[about_page, journal_page, home_page, Page_page])
 NPG.run()
+
+
 
 
 

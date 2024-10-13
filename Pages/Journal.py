@@ -22,5 +22,6 @@ with center:
                 container.write(context)
 
     add_page = st.container()
-    if add_page.button("Add Page",icon=":material/add_circle:"):
-        st.switch_page("Page.py")
+    add_page.page_link("Pages/Page.py",label="Add Page",icon=":material/add_circle:")
+    # if add_page.button("Add Page",icon=":material/add_circle:"):
+    #     st.switch_page("Page.py")

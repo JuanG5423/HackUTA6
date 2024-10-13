@@ -4,22 +4,9 @@ import pathlib
 from cryptography.fernet import Fernet
 from Pages.Login import get_auth_key, decrypt_journal
 from ai import analyze_input
-from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
+from transformers import pipeline
 
 
-
-def clear_pages():
-    start_word = str(st.session_state.user_state['user_ID'])
-    directory = pathlib.Path("./entries")
-    # Iterate through files in the directory
-    for file_path in directory.iterdir():
-        # Check if the file starts with the specified word
-        if file_path.is_file() and file_path.name.startswith(start_word):
-            try:
-                file_path.unlink()  # Delete the file
-            except Exception as e:
-                print(f"Error deleting {file_path}: {e}")
-                exit(-1)
 # Load custom CSS for styling
 def load_css(file_path):
     with open(file_path) as f:
@@ -39,24 +26,13 @@ if st.session_state.user_state['logged_in']:
         else:
             return string[:max_length] + "..."
 
-    if st.button("Clear Pages"):
-        clear_pages()
     folder_path = './entries'
     files = [f for f in os.listdir(folder_path) if f.endswith('.jada') and f.startswith(str(st.session_state.user_state['user_ID']))]
 
     # Dialog to show results after analysis
     @st.dialog("JADA is Responding...")
     def analyze_file(context):
-        # Load the tokenizer and model from Hugging Face
-        model_name = "JuanG5423/roberta-JADA"
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-        model = AutoModelForSequenceClassification.from_pretrained(model_name)
-
-        # Create the emotion analyzer pipeline
-        emotion_analyzer = pipeline("text-classification", model=model, tokenizer=tokenizer)
-
-        # Analyze the context
-        emotion, confidence = analyze_input(emotion_analyzer, context)
+        emotion, confidence = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
         output = f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence." if emotion == "suicidal" else f"Your journal entry indicates that you are experiencing {emotion} with {confidence}% confidence."
         st.write(output)
         if emotion == "suicidal":

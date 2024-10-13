@@ -36,13 +36,17 @@ Page_page = st.Page(
 )
 
 
+Login_page = st.Page(
+    page = "Pages/Login.py",
+    title = "Log in"
+)
 
 
 
 # --- Navigation setup [without sections] --
 
 st.logo("Assets/JADALOGO.png") 
-NPG = st.navigation(pages=[about_page, journal_page, home_page, Page_page])
+NPG = st.navigation(pages=[about_page, journal_page, home_page, Page_page, Login_page])
 NPG.run()
 
 

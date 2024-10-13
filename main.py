@@ -49,7 +49,7 @@ Demo_page = st.Page(
 
 # --- Navigation setup [without sections] --
 
-st.logo("/home/unknown/HackUTA6/Assets/JADALOGO.png") 
+st.logo("Assets/JADALOGO.png") 
 NPG = st.navigation(pages=[about_page, journal_page, home_page, Demo_page])
 NPG.run()
 

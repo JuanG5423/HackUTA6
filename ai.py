@@ -75,7 +75,7 @@ def split_data(original_data_file: str, training_file: str, validation_file: str
     df = pd.read_csv(original_data_file)
     
     # Sample the training data
-    training = df.sample(frac=training_percent / 100, random_state=42)
+    training = df.sample(frac=training_percent / 100)
     
     # The validation data is the remainder of the dataset
     validation = df.drop(training.index)
@@ -128,7 +128,7 @@ def combine_files(files : list[str], combined_file_path : str, rows_to_keep : in
 
     combined_df["label"] = combined_df["label"].astype(int)
 
-    combined_df = combined_df.sample(frac=1, random_state=42).reset_index(drop=True)
+    combined_df = combined_df.sample(frac=1).reset_index(drop=True)
 
     if rows_to_keep is not None:
         combined_df = combined_df.head(rows_to_keep)
@@ -174,6 +174,6 @@ if __name__ == "__main__":
             if "label" not in df.columns:
                 add_label(file, file.split(".")[0] + "_labeled.csv", 7)
                 files_to_process[index] = file.split(".")[0] + "_labeled.csv"
-        combine_files(files_to_process, "full_dataset.csv", 4000)
-        split_data("full_dataset.csv", "full_training.csv", "full_validation.csv")
-        teach_emotion("full_training.csv", "full_validation.csv", "j-hartmann/emotion-english-distilroberta-base", 8, device)
+        combine_files(files_to_process, "data/full_dataset.csv", 4000)
+        split_data("data/full_dataset.csv", "data/full_training.csv", "data/full_validation.csv")
+        teach_emotion("data/full_training.csv", "data/full_validation.csv", "j-hartmann/emotion-english-distilroberta-base", 8, device)

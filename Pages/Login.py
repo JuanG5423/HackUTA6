@@ -1,8 +1,16 @@
 import streamlit as st
 import pandas as pd
 import requests as rs
+import pathlib
 from cryptography.fernet import Fernet
 import csv
+
+def load_css(file_path):
+    with open(file_path) as f:
+        st.html(f"<style>{f.read()}</style>")
+        
+css_path = pathlib.Path("Pages/style.css")
+load_css(css_path)
 
 col1, col2, col3 = st.columns([2,4,2])
 top = st.container()
@@ -45,7 +53,7 @@ if not st.session_state.user_state['logged_in']:
     # Create login form
     mail_adress = st.text_input('E-Mail')
     password = st.text_input('Password', type='password')
-    submit = st.button('Login')
+    submit = st.button('Login', key="login")
 
     @st.dialog("Create Login")
     def open_account():
@@ -53,7 +61,7 @@ if not st.session_state.user_state['logged_in']:
         name = st.text_input("Name")
         word = st.text_input("Password", type='password', key='create')
 
-        if st.button("Create"):
+        if st.button("Create",key="c"):
             with open("database.csv", 'a+', newline='') as file:
                 file.seek(0)  # Move the cursor to the start of the file
                 reader = csv.reader(file)
@@ -69,7 +77,7 @@ if not st.session_state.user_state['logged_in']:
                     file.write(f"{mail},{name},user,{cypher.encrypt(word.encode()).decode()},{Fernet.generate_key().decode()},{7770000 + len(lines)}")
                     st.rerun()
 
-    if st.button("Create Login", use_container_width=True):
+    if st.button("Create Login", use_container_width=True, key="Create"):
         open_account()
 
 

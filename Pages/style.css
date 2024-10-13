@@ -26,47 +26,81 @@
     justify-content: space-around;
 }
 
+.st-key-Jada button:hover{
+    color:blue;
+    background-color:#f8f8f8;
+    border: none;
+}
+
+.st-key-Create button:hover{
+    color:blue;
+    background-color:#f8f8f8;
+    border: none;
+}
+
+.st-key-c button:hover{
+    color:blue;
+    background-color:#f8f8f8;
+    border: none;
+}
+
+.st-key-login button:hover{
+    color:blue;
+    background-color:#f8f8f8;
+    border: none;
+}
+
+
 .st-key-Help button:hover{
+    color:red;
     background-color:#f8f8f8;
     border: none;
 }
 
 .st-key-OOPS button:hover{
+    color:blue;
     background-color:#f8f8f8;
     border: none;
 }
 .st-key-NAFI button:hover{
+    color: blue;
     background-color: #f8f8f8;
     border: none;
 
 }
 
 .st-key-JUAN button:hover{
+    color: blue;
     background-color: #f8f8f8;
     border: none;
 
 }
 .st-key-JONJON button:hover{
+    color:blue;
     background-color: #f8f8f8;
     border: none;
 
 }
 .st-key-Try button:hover{
+    color:blue;
     background-color: #f8f8f8;
     border: none;
 }
 
 .st-key-green button:hover{
+    color:blue;
     background-color: #f8f8f8;
     border: none;
 }
 
 .st-key-red button:hover{
+    color:blue;
     background-color: #f8f8f8 ;
     border: none;
 }
 
 .st-key-black button:hover{
+    color:blue;
     background-color: #f8f8f8;
     border: none;
 }

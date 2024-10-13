@@ -30,10 +30,10 @@ with top:
 #         file.write(journal + "\n")
 #     st.write("Saved successfully")
     
-#     st.write("View Journal Entries")
-# with open("/home/unknown/HackUTA6/Pages/JournalDB/journal.txt", "r") as file:
-#     journal_entries = file.readlines()
-#     for entry in journal_entries:
-#         st.write(entry)
+    st.write("View Journal Entries")
+with open("/home/unknown/HackUTA6/Pages/JournalDB/journal.txt", "r") as file:
+    journal_entries = file.readlines()
+    for entry in journal_entries:
+        st.write(entry)
 
     

@@ -38,11 +38,15 @@ if st.session_state.user_state['logged_in']:
                     container.write(truncate_string(context, 100))
 
                     #Perform analysis using our model and tokenizer with the context as input
-                    emotion, confidence = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
-                    st.write(f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence.")
+                    @st.dialog("Analysis")
+                    def emotional_analysis_button():
 
-                    if emotion == "suicidal":
-                        st.write("I'm so sorry you're feeling like that. Please reach out to a mental health professional or a trusted friend or family member for help.")
+                        emotion, confidence = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
+                        st.write(f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence.")
+                        if emotion == "suicidal":
+                            st.write("I'm so sorry you're feeling like that. Please reach out to a mental health professional or call the suicide hot line at 1-800-273-8255. Sometimes talking to someone close can help too! such as a friend or family memeber.")
+                        elif emotion == "sexual violence" or emotion == "physical violence":
+                            st.write("It seems you're facing some serious issues, it is recommended to either contact the police or the domestic abuse hot line: 1−800−799−SAFE(7233)")
 
         add_page = st.container()
         add_page.page_link("Pages/Page.py",label="Add Page",icon=":material/add_circle:")

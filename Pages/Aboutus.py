@@ -31,7 +31,7 @@ def after_click(button_name):
         st.image(juan_IP, use_column_width=True)
         with st.expander("What he do?"):
             st.markdown("----------")
-            st.text("Trained the emotion detection model and by train I mean waited like 10 hours for it to finish.")
+            st.text("Trained the emotion detection model\nand by train I mean waited like 10 hours for it to finish.")
     elif button_name == "button3":
         st.subheader("JON JON")
         st.image(abdul_IP, use_column_width=True)

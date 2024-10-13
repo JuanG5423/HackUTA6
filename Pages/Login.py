@@ -87,8 +87,9 @@ if not st.session_state.user_state['logged_in']:
         login()
         
 elif st.session_state.user_state['logged_in']:
-    st.write('Hi, welcome, ', get_name())
-    with st.expander("Menu"):
+    beta = st.container()
+    beta.write('Hi, welcome, '+ get_name())
+    with beta.expander("Menu"):
         st.text("Access Your Journal")
         st.page_link("Pages/Journal.py", label= "Journal", icon=":material/book:")
         st.markdown("-------")

@@ -27,7 +27,7 @@ about_page = st.Page(
 
 journal_page = st.Page(
     page = "Pages/Journal.py",
-    title = "Journal",
+    title = "Journals",
     icon = ":material/book:",
 )
 
@@ -38,74 +38,32 @@ home_page = st.Page(
     default= True,
 )
 
-Page_page = st.Page(
-    page = "Pages/Page.py",
-    title = "New Page",
-    icon = ":material/note_add:"
-)
-
-
-Login_page = st.Page(
-    page = "Pages/Login.py",
-    title = "Log in"
-)
-
 Demo_page = st.Page(
     page = "Pages/Demo.py",
     title = "Demo",
     icon = ":material/play_arrow:",
 )
 
+Login_page = st.Page(
+    page = "Pages/Login.py",
+    title = "Login",
+    icon=":material/login:"
+)
+
+Page_page = st.Page(
+    page  = "Pages/Page.py",
+    title = "New Page",
+    icon = ":material/note_add:",
+)
+
+
 # --- Navigation setup [without sections] --
 
 st.logo("Assets/JADALOGO.png") 
-
-NPG = st.navigation(pages=[about_page, journal_page, home_page, Page_page, Login_page, Demo_page])
+NPG = st.navigation(pages=[about_page, journal_page, home_page, Page_page, Demo_page, Login_page])
 NPG.run()
 
 
 
 
-
-
 # st.markdown(
-#         "<h1 style='text-align: center;'>WELCOME</h1>", 
-#         unsafe_allow_html=True
-# #     )
-# image_path = "Assets/JADALOGO.png"
-# with col2:
-#     st.image(image_path, width=450)
-    
-
-# Logo_Image = Image.open("Assets/JADALOGO.png")
-# st.image(
-#     Logo_Image,
-#     caption = "JADA is a Journaling AI Detection App. Anger, joy, sadness, write your mind down and see what JADA thinks",
-#     width= 900,
-#     #channels= "RGB"
-# )
-
-
-# Display and center the image
-
-
-# markdown to create a container that centers the image
-# st.markdown(
-#     f"""
-#     <div style="display: flex; justify-content: center;">
-#         <img src="{image_path}" alt="centered image" width="300">
-#     </div>
-#     """,
-#     unsafe_allow_html=True
-# )
-# Local image path
-
-# Create two empty columns with one column in the center
-
-
-# Center the image in the middle column
-
-
-#st.image(image_path, width=800)
-#st.text("J-A-D-A is a journaling AI Detection App. Anger, joy, sadness, write your mind down and see how jada interprets it.\n")
-#st.markdown("![Hello](Assets/JADAAI.png)")

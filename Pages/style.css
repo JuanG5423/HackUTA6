@@ -26,6 +26,11 @@
     justify-content: space-around;
 }
 
+.st-key-Help button:hover{
+    background-color:#f8f8f8;
+    border: none;
+}
+
 .st-key-OOPS button:hover{
     background-color:#f8f8f8;
     border: none;

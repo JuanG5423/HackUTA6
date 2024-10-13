@@ -37,7 +37,14 @@ def after_click(button_name):
         st.image(abdul_IP, use_column_width=True)
         with st.expander("What he do?"):
             st.markdown("----------")
-            st.text("Say your stuff")
+            st.markdown("""
+                        - Did not want to do the project
+                        - Ended up joining a side quest of doing a project
+                        - Ended up being broke on points
+                        - Ended up doing streamlit library functionality with entegrated custom HTML, CSS handling
+                        - Endeup up doing button handling streamlit style ( very very fun )
+                        """)
+            
 
 
 # Top container section

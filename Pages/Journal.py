@@ -51,6 +51,8 @@ if st.session_state.user_state['logged_in']:
 
         add_page = st.container()
         add_page.page_link("Pages/Page.py",label="Add Page",icon=":material/add_circle:")
+        if add_page.button("analysis"):
+            emotional_analysis_button()
         # if add_page.button("Add Page",icon=":material/add_circle:"):
         #     st.switch_page("Page.py")
 else: 

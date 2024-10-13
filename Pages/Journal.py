@@ -41,38 +41,42 @@ if st.session_state.user_state['logged_in']:
             st.write("It seems you're facing some serious issues. It is recommended to either contact the police or the domestic abuse hotline: 1-800-799-SAFE (7233).")
 
     # Display each journal file with its content and an "Analyze" button to the right
-    for file_name in files:
-        file_path = os.path.join(folder_path, file_name)
-        with open(file_path, 'r') as file:
-            context = f.decrypt(file.read().encode('utf-8')).decode()
-            truncated_text = truncate_string(context, 100)
+    if files:  # Check if there are any files before displaying
+        for file_name in files:
+            file_path = os.path.join(folder_path, file_name)
+            with open(file_path, 'r') as file:
+                context = f.decrypt(file.read().encode('utf-8')).decode()
+                truncated_text = truncate_string(context, 100)
 
-            # Create columns for layout: file content in one column, button in another column
-            col1, col2 = st.columns([4, 1])
+                # Create columns for layout: file content in one column, button in another column
+                col1, col2 = st.columns([4, 1])
 
-            with col1:
-                # Box the journal content with some padding and border
-                st.markdown(f"""
-                <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; background-color: #f9f9f9;">
-                    {truncated_text}
-                </div>
-                """, unsafe_allow_html=True)
+                with col1:
+                    # Box the journal content with some padding and border
+                    st.markdown(f"""
+                    <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; background-color: #f9f9f9;">
+                        {truncated_text}
+                    </div>
+                    """, unsafe_allow_html=True)
 
+                with col2:
+                    # Place the analyze button in the second column (to the right)
+                    if st.button(f"Ask JADA", key=f"Analyze_{file_name}"):
+                        analyze_file(context)
+
+        # Center the "Analyze All Entries" button if files exist
+        if files:  # Show button only if there are entries
+            col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
-                # Place the analyze button in the second column (to the right)
-                if st.button(f"Ask JADA", key=f"Analyze_{file_name}"):
-                    analyze_file(context)
-
-    # Center the "Analyze All Entries" button
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        if st.button("Analyze All Entries"):
-            all_text = ""
-            for file_name in files:
-                file_path = os.path.join(folder_path, file_name)
-                with open(file_path, 'r') as file:
-                    all_text += f.decrypt(file.read().encode('utf-8')).decode() + "\n"
-            analyze_file(all_text)
+                if st.button("Analyze All Entries"):
+                    all_text = ""
+                    for file_name in files:
+                        file_path = os.path.join(folder_path, file_name)
+                        with open(file_path, 'r') as file:
+                            all_text += f.decrypt(file.read().encode('utf-8')).decode() + "\n"
+                    analyze_file(all_text)
+    else:
+        st.write("No journal entries found.")
 
 else:
     def click(button_active):

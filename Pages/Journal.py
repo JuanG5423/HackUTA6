@@ -7,6 +7,18 @@ from ai import analyze_input
 from transformers import pipeline
 
 
+def clear_pages():
+    start_word = str(st.session_state.user_state['user_ID'])
+    directory = pathlib.Path("./entries")
+    # Iterate through files in the directory
+    for file_path in directory.iterdir():
+        # Check if the file starts with the specified word
+        if file_path.is_file() and file_path.name.startswith(start_word):
+            try:
+                file_path.unlink()  # Delete the file
+            except Exception as e:
+                print(f"Error deleting {file_path}: {e}")
+                exit(-1)
 # Load custom CSS for styling
 def load_css(file_path):
     with open(file_path) as f:
@@ -26,6 +38,8 @@ if st.session_state.user_state['logged_in']:
         else:
             return string[:max_length] + "..."
 
+    if st.button("Clear Pages"):
+        clear_pages()
     folder_path = './entries'
     files = [f for f in os.listdir(folder_path) if f.endswith('.jada') and f.startswith(str(st.session_state.user_state['user_ID']))]
 

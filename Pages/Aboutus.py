@@ -25,13 +25,13 @@ def after_click(button_name):
         st.image(nafi_IP, use_column_width=True)
         with st.expander("What he do?"):
             st.markdown("----------");
-            st.text("Say your stuff")
+            st.text("I created the Page system for the journal as well as the \nLogin system for the app to ensure that only registered users are allowed \nto use the program.\n(I also spent my last brain cell holding my will to live and will be\nusing this program extensivly after Hack...)")
     elif button_name == "button2":
         st.subheader("JUAN")
         st.image(juan_IP, use_column_width=True)
         with st.expander("What he do?"):
             st.markdown("----------")
-            st.text("Say your stuff")
+            st.text("Trained the emotion detection model and by train I mean waited like 10 hours for it to finish.")
     elif button_name == "button3":
         st.subheader("JON JON")
         st.image(abdul_IP, use_column_width=True)

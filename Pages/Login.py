@@ -59,7 +59,7 @@ if not st.session_state.user_state['logged_in']:
                     file.write(f"{mail},{name},user,{word},{Fernet.generate_key().decode()},{7770000 + len(lines)}")
                     st.rerun()
 
-    if st.button("Create Login"):
+    if st.button("Create Login", use_container_width=True):
         open_account()
 
 

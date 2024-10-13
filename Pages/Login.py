@@ -4,7 +4,6 @@ import requests as rs
 from cryptography.fernet import Fernet
 import csv
 
-
 st.title('JADA: the App that cares')
 
 database = pd.read_csv('database.csv', header=0)
@@ -81,5 +80,3 @@ def decrypt_journal(message : str):
     key = get_auth_key()
     f = Fernet(key)
     return f.decrypt(message.encode('utf-8')).decode()
-
-

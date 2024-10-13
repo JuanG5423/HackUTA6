@@ -42,4 +42,3 @@ if st.session_state.user_state['logged_in']:
         #     st.switch_page("Page.py")
 else:
     st.title("Login to use our App!!")
-

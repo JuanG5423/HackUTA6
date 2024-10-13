@@ -39,7 +39,7 @@ if st.session_state.user_state['logged_in']:
 
                     @st.dialog("JADA is Responding...")
                     def AI_popUP(button_active):
-                        dail_col1, dail_col2, dail_col3 = st.columns([1.,2,1])
+                        dail_col1, dail_col2, dail_col3 = st.columns([1,2,1])
                         dail_top = st.container()
                         dail_center = st.container()
                         dail_bottom = st.container()

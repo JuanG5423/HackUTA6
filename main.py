@@ -50,11 +50,17 @@ Login_page = st.Page(
     icon=":material/login:"
 )
 
+Page_page = st.Page(
+    page  = "Pages/Page.py",
+    title = "New Page",
+    icon = ":material/note_add:",
+)
+
 
 # --- Navigation setup [without sections] --
 
 st.logo("Assets/JADALOGO.png") 
-NPG = st.navigation(pages=[about_page, journal_page, home_page, Demo_page, Login_page])
+NPG = st.navigation(pages=[about_page, journal_page, home_page, Page_page, Demo_page, Login_page])
 NPG.run()
 
 

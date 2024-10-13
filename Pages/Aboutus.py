@@ -6,8 +6,7 @@ def load_css(file_path):
     with open(file_path) as f:
         st.html(f"<style>{f.read()}</style>")
         
-css_path = pathlib.Path("/home/unknown/HackUTA6/Pages/style.css")
-load_css(css_path)
+css_path = pathlib.Path("Pages/style.css")
 
 col1, col2, col3 = st.columns(3)
 

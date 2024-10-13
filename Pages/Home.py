@@ -48,11 +48,7 @@ with bottom:
             st.text("How to Use")
             st.page_link("Pages/Demo.py", label= "Demo", icon=":material/play_arrow:")
             st.markdown("-------")
-            
-            st.text("Access Your Journal")
-            st.page_link("Pages/Journal.py", label= "Journal", icon=":material/book:")
-            st.markdown("-------")
-            
+              
             st.text("Know The Team")
             st.page_link("Pages/Aboutus.py", label= "The Team", icon=":material/groups:")
             
@@ -77,15 +73,7 @@ with bottom:
     
         
    
-# Render the image as a button
-# st.markdown(
-#     f"""
-#     <a href="http://localhost:8501/Demo;" onclick="document.getElementById('image_button').click();">
-#         <img src="Assets/JADAAI.jpeg" style="width: 200px; cursor: pointer;" />
-#     </a>
-#     """,
-#     unsafe_allow_html=True
-# )
+
 
 
     

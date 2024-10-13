@@ -3,13 +3,10 @@ top = st.container()
 middle = st.container()
 bottom = st.container()
 
-# def click(button_active):
-#     if button_active == True:
-#         st.text(
-#             "JADA is a Journaling AI Detection App.\nAnger, joy, sadness, write your mind down\nand see what JADA thinks"
-#         )
+
 
 with top:
+    st.title("Learning Guide")
     with st.expander("What is JADA?"):
         st.text(
             "JADA is a Journaling AI Detection App.\nAnger, joy, sadness, write your mind down\nand see what JADA thinks"
@@ -25,18 +22,6 @@ with top:
         
         
         
-# st.markdown("----------------")
-# st.write("Journal Feature")
-# journal = st.text_area("Write your thoughts here")
-# if st.button("Save"):
-#     with open("/home/unknown/HackUTA6/Pages/JournalDB/journal.txt", "a") as file:
-#         file.write(journal + "\n")
-#     st.write("Saved successfully")
-    
-#     st.write("View Journal Entries")
-# with open("/home/unknown/HackUTA6/Pages/JournalDB/journal.txt", "r") as file:
-#     journal_entries = file.readlines()
-#     for entry in journal_entries:
-#         st.write(entry)
+
 
     

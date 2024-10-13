@@ -9,7 +9,7 @@ def load_css(file_path):
 css_path = pathlib.Path("Pages/style.css")
 load_css(css_path)
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = st.columns([2,4,2])
 
 
 nafi_IP = "Assets/nafidead.jpg"
@@ -42,7 +42,7 @@ def after_click(button_name):
                         - Ended up joining a side quest of doing a project
                         - Ended up being broke on points
                         - Ended up doing streamlit library functionality with entegrated custom HTML, CSS handling
-                        - Endeup up doing button handling streamlit style ( very very fun )
+                        - Ended up up doing button handling streamlit style ( very very fun )
                         """)
             
 
@@ -78,5 +78,20 @@ with bottom:
     if button3:
         st.session_state['button_clicked'] = "button3"
         after_click(st.session_state['button_clicked'])
+        
+        
+with st.expander("Menu"):
+    st.text("Create an Account or Login")
+    st.page_link("Pages/Login.py", label= "Create or Login", icon=":material/login:")
+    st.markdown("-------")
+            
+    st.text("How to Use")
+    st.page_link("Pages/Demo.py", label= "Demo", icon=":material/play_arrow:")
+    st.markdown("-------")
+              
+    st.text("Know The Team")
+    st.page_link("Pages/Aboutus.py", label= "The Team", icon=":material/groups:")
+        
+
 
     

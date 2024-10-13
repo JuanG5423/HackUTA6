@@ -26,6 +26,31 @@
     justify-content: space-around;
 }
 
+.st-key-OOPS button:hover{
+    background-color:#f8f8f8;
+    border: none;
+}
+.st-key-NAFI button:hover{
+    background-color: #f8f8f8;
+    border: none;
+
+}
+
+.st-key-JUAN button:hover{
+    background-color: #f8f8f8;
+    border: none;
+
+}
+.st-key-JONJON button:hover{
+    background-color: #f8f8f8;
+    border: none;
+
+}
+.st-key-Try button:hover{
+    background-color: #f8f8f8;
+    border: none;
+}
+
 .st-key-green button:hover{
     background-color: #f8f8f8;
     border: none;

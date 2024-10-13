@@ -1,10 +1,18 @@
 import streamlit as st
 import os
+import pathlib
 from cryptography.fernet import Fernet
 from Pages.Login import get_auth_key, decrypt_journal
 from ai import analyze_input
 from transformers import pipeline
 
+
+def load_css(file_path):
+    with open(file_path) as f:
+        st.html(f"<style>{f.read()}</style>")
+        
+css_path = pathlib.Path("Pages/style.css")
+load_css(css_path)
 
 if st.session_state.user_state['logged_in']:
     key = get_auth_key()
@@ -40,5 +48,21 @@ if st.session_state.user_state['logged_in']:
         add_page.page_link("Pages/Page.py",label="Add Page",icon=":material/add_circle:")
         # if add_page.button("Add Page",icon=":material/add_circle:"):
         #     st.switch_page("Page.py")
-else:
-    st.title("Login to use our App!!")
+else: 
+    def click(button_active):
+        if button_active == True:
+            with st.expander("Options"):
+                st.page_link("Pages/Login.py", label= "Create or Login", icon=":material/login:")
+                st.markdown("-------")
+                st.page_link("Pages/Home.py", label="Home", icon=":material/nest_eco_leaf:")
+                
+    
+    if 'button_active' not in st.session_state:
+        st.session_state['button_active'] = False
+
+    # Create a button
+    if st.button("OOPS! Need A Registered Account to use Journals.", icon=":material/warning:", key="OOPS"):
+    # Toggle the button's state each time it's clicked
+        st.session_state['button_active'] = not st.session_state['button_active']
+        click(st.session_state['button_active'])
+

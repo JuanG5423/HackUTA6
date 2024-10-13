@@ -6,7 +6,17 @@ from PIL import Image
 # st.set_page_config(
 #     page_title= "JADA APP",
 #     page_icon= "JADAAI.png",
-# )
+# )# Create user_state
+if 'user_state' not in st.session_state:
+    st.session_state.user_state = {
+        'name_surname': '',
+        'password': '',
+        'logged_in': False,
+        'user_type': '',
+        'mail_adress': '',
+        'auth_key': '',
+        'user_ID': ''
+    }
 
 about_page = st.Page(
     page ="Pages/Aboutus.py",

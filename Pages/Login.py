@@ -1,27 +1,14 @@
 import streamlit as st
 import pandas as pd
 import requests as rs
-
+from cryptography.fernet import Fernet
+import csv
 
 
 st.title('Amazing User Login App')
 
-sheet_csv = st.secrets["database_url"]
-res = rs.get(url=sheet_csv)
-open('database.csv', 'wb').write(res.content)
 database = pd.read_csv('database.csv', header=0)
 
-# Create user_state
-if 'user_state' not in st.session_state:
-    st.session_state.user_state = {
-        'name_surname': '',
-        'password': '',
-        'logged_in': False,
-        'user_type': '',
-        'mail_adress': '',
-        'auth_key': '',
-        'user_ID': ''
-    }
 
 def get_name():
     return st.session_state.user_state['mail_adress']
@@ -49,6 +36,33 @@ if not st.session_state.user_state['logged_in']:
     mail_adress = st.text_input('E-Mail')
     password = st.text_input('Password', type='password')
     submit = st.button('Login')
+
+    @st.dialog("Create Login")
+    def open_account():
+        mail = st.text_input("Email")
+        name = st.text_input("Name")
+        word = st.text_input("Password", type='password', key='create')
+
+        if st.button("Create"):
+            with open("database.csv", 'a+', newline='') as file:
+                file.seek(0)  # Move the cursor to the start of the file
+                reader = csv.reader(file)
+                lines = list(reader)  # Read all existing lines
+
+                # Check for duplicate email
+                existing_emails = [line[0] for line in lines if line]  # Get all existing emails from the first column
+                if mail in existing_emails:
+                    st.error("Email already exists. Please use a different email.")
+                else:
+                    # Write the new entry
+                    file.write("\n")
+                    file.write(f"{mail},{name},user,{word},{Fernet.generate_key().decode()},{7770000 + len(lines)}")
+                    st.rerun()
+
+    if st.button("Create Login"):
+        open_account()
+
+
 
     # Check if user is logged in
     if submit:

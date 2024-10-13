@@ -4,7 +4,8 @@ import pathlib
 from cryptography.fernet import Fernet
 from Pages.Login import get_auth_key, decrypt_journal
 from ai import analyze_input
-from transformers import pipeline
+from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
+
 
 
 def clear_pages():
@@ -46,7 +47,16 @@ if st.session_state.user_state['logged_in']:
     # Dialog to show results after analysis
     @st.dialog("JADA is Responding...")
     def analyze_file(context):
-        emotion, confidence = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
+        # Load the tokenizer and model from Hugging Face
+        model_name = "JuanG5423/roberta-JADA"
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+        # Create the emotion analyzer pipeline
+        emotion_analyzer = pipeline("text-classification", model=model, tokenizer=tokenizer)
+
+        # Analyze the context
+        emotion, confidence = analyze_input(emotion_analyzer, context)
         output = f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence." if emotion == "suicidal" else f"Your journal entry indicates that you are experiencing {emotion} with {confidence}% confidence."
         st.write(output)
         if emotion == "suicidal":

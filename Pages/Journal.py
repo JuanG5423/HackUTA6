@@ -2,7 +2,10 @@ import streamlit as st
 import os
 import pathlib
 from cryptography.fernet import Fernet
-from Pages.Login import get_auth_key
+from Pages.Login import get_auth_key, decrypt_journal
+from ai import analyze_input
+from transformers import pipeline
+
 
 def load_css(file_path):
     with open(file_path) as f:
@@ -34,6 +37,13 @@ if st.session_state.user_state['logged_in']:
                     container.columns(len(os.listdir(folder_path)), vertical_alignment="bottom")
                     container.write(truncate_string(context, 100))
 
+                    #Perform analysis using our model and tokenizer with the context as input
+                    emotion, confidence = analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), context)
+                    st.write(f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence.")
+
+                    if emotion == "suicidal":
+                        st.write("I'm so sorry you're feeling like that. Please reach out to a mental health professional or a trusted friend or family member for help.")
+
         add_page = st.container()
         add_page.page_link("Pages/Page.py",label="Add Page",icon=":material/add_circle:")
         # if add_page.button("Add Page",icon=":material/add_circle:"):
@@ -55,8 +65,4 @@ else:
     # Toggle the button's state each time it's clicked
         st.session_state['button_active'] = not st.session_state['button_active']
         click(st.session_state['button_active'])
-        
-    
-    
-
 

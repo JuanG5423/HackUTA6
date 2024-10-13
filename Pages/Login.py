@@ -5,7 +5,7 @@ from cryptography.fernet import Fernet
 import csv
 
 
-st.title('Amazing User Login App')
+st.title('JADA: the App that cares')
 
 database = pd.read_csv('database.csv', header=0)
 

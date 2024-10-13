@@ -1,0 +1,43 @@
+*{
+
+    padding: 0;
+    margin: 0;
+    font-family: 'Josefin Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+.about{
+    width:  100%;
+    padding: 78px 0px;
+    /*background-color: ;*/
+
+}
+
+.about-text{
+    width: 550px;
+}
+
+.main{
+    width: 1130px;
+    max-width: 1130px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.st-key-green button:hover{
+    background-color: #f8f8f8;
+    border: none;
+}
+
+.st-key-red button:hover{
+    background-color: #f8f8f8 ;
+    border: none;
+}
+
+.st-key-black button:hover{
+    background-color: #f8f8f8;
+    border: none;
+}
+

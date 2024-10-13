@@ -15,7 +15,7 @@ with open('encryption_key.key', 'rb') as key_file:
 f = Fernet(key)
 
 
-st.title("Journay Entry 1:?")
+st.title("Journay Entry 1:")
 entry = st.text_area("write your feelings", height = 900)
 
 with open("entries/entry.jada", "w") as file:

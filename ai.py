@@ -39,7 +39,7 @@ def analyze_input(emotion_analyzer, text : str) -> str:
     emotion = emotions[0]['label'].split('_')[1]
     confidence = emotions[0]['score'] * 100
     result =  f"Emotion:{emotion},Confidence:{confidence:.1f}%"
-    return f"Your journal entry indicates that you are feeling {label2emotion[emotion]} with a confidence of {confidence:.1f}%"
+    return (label2emotion[emotion], confidence.__format__(".1f"))
     
 
 def tokenize_function(examples, tokenizer):

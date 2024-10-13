@@ -37,7 +37,6 @@ def analyze_input(emotion_analyzer, text : str) -> None:
     emotions = emotion_analyzer(text)
     #Fix print statement
     print(f"Emotion: {label2emotion[emotions[0]['label'].split('_')[1]]}, Confidence: {emotions[0]['score'] * 100:.1f}%")
-    text = input("Enter text to analyze: ")
 
 def tokenize_function(examples, tokenizer):
     """
@@ -181,7 +180,15 @@ if __name__ == "__main__":
     
     if len(argv) >= 2 and argv[1] == "test":
         #analyze_input(pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base"))
-        analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"))
+        analyze_input(pipeline("text-classification", model="model", tokenizer="tokenizer"), """
+I am feeling depressed
+I want to kill myself
+I want to kill myself
+I want to end it all
+I hate myself
+Make it stop
+IM SO FUCKING ANGRY
+""")
 
     elif len(argv) >= 2 and argv[1] == "fix":
         delete_lines_with_non_digit_substring("data/suicide_cleaned.csv", "data/suicide_cleaned2.csv")

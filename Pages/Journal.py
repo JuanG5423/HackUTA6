@@ -1,7 +1,15 @@
 import streamlit as st
 import os
+import pathlib
 from cryptography.fernet import Fernet
 from Pages.Login import get_auth_key
+
+def load_css(file_path):
+    with open(file_path) as f:
+        st.html(f"<style>{f.read()}</style>")
+        
+css_path = pathlib.Path("Pages/style.css")
+load_css(css_path)
 
 if st.session_state.user_state['logged_in']:
     key = get_auth_key()

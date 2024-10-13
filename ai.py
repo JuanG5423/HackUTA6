@@ -13,7 +13,7 @@ from transformers import (
     BertTokenizer
 )
 
-def analyze_input(emotion_analyzer, text : str) -> None:
+def analyze_input(emotion_analyzer, text : str) -> str:
     """
     Keeps prompting the user for input and performs emotional analysis on each input.
     Prints the detected emotion and confidence score.
@@ -36,7 +36,11 @@ def analyze_input(emotion_analyzer, text : str) -> None:
 
     emotions = emotion_analyzer(text)
     #Fix print statement
-    print(f"Emotion: {label2emotion[emotions[0]['label'].split('_')[1]]}, Confidence: {emotions[0]['score'] * 100:.1f}%")
+    emotion = emotions[0]['label'].split('_')[1]
+    confidence = emotions[0]['score'] * 100
+    result =  f"Emotion:{emotion},Confidence:{confidence:.1f}%"
+    return f"Your journal entry indicates that you are feeling {label2emotion[emotion]} with a confidence of {confidence:.1f}%"
+    
 
 def tokenize_function(examples, tokenizer):
     """

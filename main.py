@@ -6,7 +6,17 @@ from PIL import Image
 # st.set_page_config(
 #     page_title= "JADA APP",
 #     page_icon= "JADAAI.png",
-# )
+# )# Create user_state
+if 'user_state' not in st.session_state:
+    st.session_state.user_state = {
+        'name_surname': '',
+        'password': '',
+        'logged_in': False,
+        'user_type': '',
+        'mail_adress': '',
+        'auth_key': '',
+        'user_ID': ''
+    }
 
 about_page = st.Page(
     page ="Pages/Aboutus.py",
@@ -37,13 +47,14 @@ Demo_page = st.Page(
 Login_page = st.Page(
     page = "Pages/Login.py",
     title = "Login",
-    icon =":material/login:",
+    icon=":material/login:"
 )
 
 
 # --- Navigation setup [without sections] --
-st.logo("Assets/JADALOGO.png") 
-NPG = st.navigation(pages=[about_page, journal_page, home_page, Demo_page, Login_page])
+
+st.logo("/home/unknown/HackUTA6/Assets/JADALOGO.png") 
+NPG = st.navigation(pages=[about_page, journal_page, home_page, Demo_page])
 NPG.run()
 
 

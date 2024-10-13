@@ -42,10 +42,12 @@ if st.session_state.user_state['logged_in']:
                     st.write(f"Your journal entry indicates that you are feeling {emotion} with {confidence}% confidence.")
 
                     if emotion == "suicidal":
-                        st.write("I'm so sorry you're feeling like that. Please reach out to a mental health professional, a trusted friend, or family member for help.")
+                        st.write("I'm so sorry you're feeling like that. Please reach out to a mental health professional or a trusted friend or family member for help.")
 
         add_page = st.container()
         add_page.page_link("Pages/Page.py",label="Add Page",icon=":material/add_circle:")
+        if add_page.button("analysis"):
+            emotional_analysis_button()
         # if add_page.button("Add Page",icon=":material/add_circle:"):
         #     st.switch_page("Page.py")
         

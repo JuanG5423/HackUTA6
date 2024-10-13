@@ -6,6 +6,7 @@ import os
 
 
 if st.session_state.user_state['logged_in']:
+
     # Fetch the encryption key from the user's session state
     key = get_auth_key()
     f = Fernet(key)
@@ -15,7 +16,6 @@ if st.session_state.user_state['logged_in']:
     user_id = str(st.session_state.user_state['user_ID'])
     file_path = f"entries/{user_id}entry{time_stamp.strftime('%d%m%Y')}.jada"
 
-    st.write(st.session_state)
     st.title("How Are You Feeling Today?")
     entry = st.text_area("Write your feelings", height=900)
 

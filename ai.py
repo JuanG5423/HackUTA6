@@ -24,6 +24,11 @@ def analyze_input(emotion_analyzer) -> None:
         '4': "fear",
         '5': "surprise",
         '6': "suicidal",
+        '7': "sexual violence",
+        '8': "physical violence",
+        '9': "emotional violence",
+        '10': "economic violence",
+        '11': "harmful traditional practice"
     }
 
     text = input("Enter text to analyze: ")
@@ -149,6 +154,11 @@ def delete_lines_with_non_digit_substring(input_file, output_file):
     # Write the remaining lines to the output file
     with open(output_file, 'w') as outfile:
         outfile.writelines(filtered_lines)
+
+def delete_first_column(input_csv_file : str, output_csv_file : str):
+    df = pd.read_csv(input_csv_file)
+    df.drop(df.columns[0], axis=1, inplace=True)
+    df.to_csv(output_csv_file, index=False)
             
 if __name__ == "__main__":
     data_file = "data/data.csv"
@@ -168,12 +178,12 @@ if __name__ == "__main__":
         delete_lines_with_non_digit_substring("data/suicide_cleaned.csv", "data/suicide_cleaned2.csv")
     
     else:
-        files_to_process = ["data/test.csv", "data/suicide_cleaned.csv", "data/big_data.csv"]
+        files_to_process = ["data/test.csv", "data/suicide_cleaned.csv", "data/big_data.csv", "data/violence_cleaned.csv"]
         for index, file in enumerate(files_to_process):
             df = pd.read_csv(file, encoding="latin1")
             if "label" not in df.columns:
-                add_label(file, file.split(".")[0] + "_labeled.csv", 7)
+                add_label(file, file.split(".")[0] + "_labeled.csv", 6)
                 files_to_process[index] = file.split(".")[0] + "_labeled.csv"
-        combine_files(files_to_process, "data/full_dataset.csv", 4000)
+        combine_files(files_to_process, "data/full_dataset.csv", 1500)
         split_data("data/full_dataset.csv", "data/full_training.csv", "data/full_validation.csv")
-        teach_emotion("data/full_training.csv", "data/full_validation.csv", "j-hartmann/emotion-english-distilroberta-base", 8, device)
+        teach_emotion("data/full_training.csv", "data/full_validation.csv", "j-hartmann/emotion-english-distilroberta-base", 12, device)

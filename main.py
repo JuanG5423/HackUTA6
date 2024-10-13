@@ -38,7 +38,6 @@ home_page = st.Page(
     default= True,
 )
 
-
 Page_page = st.Page(
     page = "Pages/Page.py",
     title = "New Page",
@@ -60,6 +59,7 @@ Demo_page = st.Page(
 # --- Navigation setup [without sections] --
 
 st.logo("Assets/JADALOGO.png") 
+
 NPG = st.navigation(pages=[about_page, journal_page, home_page, Page_page, Login_page, Demo_page])
 NPG.run()
 

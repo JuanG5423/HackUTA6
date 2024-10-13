@@ -7,7 +7,6 @@ def load_css(file_path):
         st.html(f"<style>{f.read()}</style>")
         
 css_path = pathlib.Path("Pages/style.css")
-load_css(css_path)
 
 col1, col2, col3 = st.columns(3)
 

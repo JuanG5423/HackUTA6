@@ -79,7 +79,24 @@ with bottom:
         st.session_state['button_clicked'] = "button3"
         after_click(st.session_state['button_clicked'])
         
+    st.text("")
+    st.text("")
+    st.text("")
+    st.text("")
+    st.text("")
+    
+    # - Shout out to our sponsors
+    st.title("Shotout to a few Sponsors")
+    with st.expander("Sponsors"):
+        st.image("Assets/MouseE.png", caption="Mouser Electronics", width=150)
+        st.image("Assets/MLH.png", caption="Major League Hacking", width=150)
+        st.image("Assets/FA.png", caption="Founders Arena", width=150)
+        st.image("Assets/utalogo.png", caption="Computer Science and Engineering", width=150)
+        st.image("Assets/utalogo.png", caption="Information Security Officer", width=150)
+        st.image("Assets/utalogo.png", caption="UTA Libraries", width=150)
         
+    
+      
 with st.expander("Menu"):
     st.text("Create an Account or Login")
     st.page_link("Pages/Login.py", label= "Create or Login", icon=":material/login:")

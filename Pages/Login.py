@@ -76,3 +76,10 @@ elif st.session_state.user_state['logged_in']:
 
 def get_auth_key():
     return st.session_state.user_state['auth_key']
+
+def decrypt_journal(message : str):
+    key = get_auth_key()
+    f = Fernet(key)
+    return f.decrypt(message.encode('utf-8')).decode()
+
+
